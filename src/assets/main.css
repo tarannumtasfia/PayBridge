@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --color-brand-50: #edfafc;
+  --color-brand-100: #d3f2f8;
+  --color-brand-200: #a8e5f1;
+  --color-brand-400: #6ecedf;
+  --color-brand-500: #4ebdd3;
+  --color-brand-600: #3da3b8;
+  --color-brand-700: #328799;
+  --color-brand-800: #2a6b7a;
+  --color-brand-900: #245662;
+  --color-brand-950: #163840;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    overflow-x: hidden;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply overflow-x-hidden bg-slate-50 text-slate-900 antialiased transition-colors duration-200 dark:bg-slate-950 dark:text-slate-100;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@layer utilities {
+  .page-section {
+    @apply mx-auto w-full max-w-6xl px-3 py-5 sm:px-4 sm:py-8 lg:py-10;
+  }
+
+  .page-title {
+    @apply text-xl font-bold text-slate-900 sm:text-2xl lg:text-3xl dark:text-slate-100;
+  }
+}
+
+@layer components {
+  .ui-card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900;
+  }
+
+  .ui-chrome {
+    @apply border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900;
+  }
+
+  .ui-surface-muted {
+    @apply bg-slate-50 dark:bg-slate-800/60;
+  }
+
+  .ui-border-subtle {
+    @apply border-slate-100 dark:border-slate-800;
+  }
+
+  .ui-text-heading {
+    @apply text-slate-900 dark:text-slate-100;
+  }
+
+  .ui-text-body {
+    @apply text-slate-600 dark:text-slate-400;
+  }
+
+  .ui-text-muted {
+    @apply text-slate-500 dark:text-slate-400;
+  }
+
+  .cart-pulse {
+    animation: cart-pulse 1.4s ease-in-out infinite;
+  }
+
+  .hint-bulb-glow {
+    animation: hint-bulb-glow 2s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cart-pulse,
+    .hint-bulb-glow {
+      animation: none;
+    }
+  }
+}
+
+@keyframes cart-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes hint-bulb-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 0 rgb(78 189 211 / 35%),
+      0 0 10px rgb(78 189 211 / 25%);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 0 5px rgb(78 189 211 / 18%),
+      0 0 18px rgb(78 189 211 / 55%);
+    transform: scale(1.06);
+  }
+}
